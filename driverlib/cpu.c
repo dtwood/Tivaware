@@ -51,23 +51,12 @@
 uint32_t __attribute__((naked))
 CPUcpsid(void)
 {
-    uint32_t ui32Ret;
-
     //
     // Read PRIMASK and disable interrupts.
     //
     __asm("    mrs     r0, PRIMASK\n"
           "    cpsid   i\n"
-          "    bx      lr\n"
-          : "=r" (ui32Ret));
-
-    //
-    // The return is handled in the inline assembly, but the compiler will
-    // still complain if there is not an explicit return here (despite the fact
-    // that this does not result in any code being produced because of the
-    // naked attribute).
-    //
-    return(ui32Ret);
+          "    bx      lr\n");
 }
 #endif
 #if defined(ewarm)
@@ -111,15 +100,6 @@ CPUcpsid(void)
     __asm("    mrs     r0, PRIMASK\n"
           "    cpsid   i\n"
           "    bx      lr\n");
-
-    //
-    // The following keeps the compiler happy, because it wants to see a
-    // return value from this function.  It will generate code to return
-    // a zero.  However, the real return is the "bx lr" above, so the
-    // return(0) is never executed and the function returns with the value
-    // you expect in R0.
-    //
-    return(0);
 }
 #endif
 
@@ -133,22 +113,12 @@ CPUcpsid(void)
 uint32_t __attribute__((naked))
 CPUprimask(void)
 {
-    uint32_t ui32Ret;
 
     //
     // Read PRIMASK and disable interrupts.
     //
     __asm("    mrs     r0, PRIMASK\n"
-          "    bx      lr\n"
-          : "=r" (ui32Ret));
-
-    //
-    // The return is handled in the inline assembly, but the compiler will
-    // still complain if there is not an explicit return here (despite the fact
-    // that this does not result in any code being produced because of the
-    // naked attribute).
-    //
-    return(ui32Ret);
+          "    bx      lr\n");
 }
 #endif
 #if defined(ewarm)
@@ -189,15 +159,6 @@ CPUprimask(void)
     //
     __asm("    mrs     r0, PRIMASK\n"
           "    bx      lr\n");
-
-    //
-    // The following keeps the compiler happy, because it wants to see a
-    // return value from this function.  It will generate code to return
-    // a zero.  However, the real return is the "bx lr" above, so the
-    // return(0) is never executed and the function returns with the value
-    // you expect in R0.
-    //
-    return(0);
 }
 #endif
 
@@ -211,23 +172,12 @@ CPUprimask(void)
 uint32_t __attribute__((naked))
 CPUcpsie(void)
 {
-    uint32_t ui32Ret;
-
     //
     // Read PRIMASK and enable interrupts.
     //
     __asm("    mrs     r0, PRIMASK\n"
           "    cpsie   i\n"
-          "    bx      lr\n"
-          : "=r" (ui32Ret));
-
-    //
-    // The return is handled in the inline assembly, but the compiler will
-    // still complain if there is not an explicit return here (despite the fact
-    // that this does not result in any code being produced because of the
-    // naked attribute).
-    //
-    return(ui32Ret);
+          "    bx      lr\n");
 }
 #endif
 #if defined(ewarm)
@@ -271,15 +221,6 @@ CPUcpsie(void)
     __asm("    mrs     r0, PRIMASK\n"
           "    cpsie   i\n"
           "    bx      lr\n");
-
-    //
-    // The following keeps the compiler happy, because it wants to see a
-    // return value from this function.  It will generate code to return
-    // a zero.  However, the real return is the "bx lr" above, so the
-    // return(0) is never executed and the function returns with the value
-    // you expect in R0.
-    //
-    return(0);
 }
 #endif
 
@@ -388,22 +329,11 @@ CPUbasepriSet(uint32_t ui32NewBasepri)
 uint32_t __attribute__((naked))
 CPUbasepriGet(void)
 {
-    uint32_t ui32Ret;
-
     //
     // Read BASEPRI
     //
     __asm("    mrs     r0, BASEPRI\n"
-          "    bx      lr\n"
-          : "=r" (ui32Ret));
-
-    //
-    // The return is handled in the inline assembly, but the compiler will
-    // still complain if there is not an explicit return here (despite the fact
-    // that this does not result in any code being produced because of the
-    // naked attribute).
-    //
-    return(ui32Ret);
+          "    bx      lr\n");
 }
 #endif
 #if defined(ewarm)
@@ -444,14 +374,5 @@ CPUbasepriGet(void)
     //
     __asm("    mrs     r0, BASEPRI\n"
           "    bx      lr\n");
-
-    //
-    // The following keeps the compiler happy, because it wants to see a
-    // return value from this function.  It will generate code to return
-    // a zero.  However, the real return is the "bx lr" above, so the
-    // return(0) is never executed and the function returns with the value
-    // you expect in R0.
-    //
-    return(0);
 }
 #endif
